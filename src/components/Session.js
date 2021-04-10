@@ -1,19 +1,40 @@
+import { Icon } from "@iconify/react";
+import minusIcon from "@iconify/icons-akar-icons/minus";
+import plusIcon from "@iconify/icons-akar-icons/plus";
+
 function Session({
   sessionLength,
   handleSessionIncrement,
   handleSessionDecrement,
 }) {
   return (
-    <div id="session-container">
-      <h2 id="session-label">Session Length</h2>
-      <p id="session-length">{sessionLength}</p>
+    <div id="session-container" className="flex flex-col items-center mt-6">
+      <h2 id="session-label" className="text-3xl">
+        Session Length
+      </h2>
 
-      <button id="session-decrement" onClick={handleSessionDecrement}>
-        -
-      </button>
-      <button id="session-increment" onClick={handleSessionIncrement}>
-        +
-      </button>
+      <div
+        id="session-length-control"
+        className="flex items-center justify-between w-28"
+      >
+        <button
+          id="session-decrement"
+          className="border-2 border-primary rounded-md w-6 h-6 flex items-center justify-center mx-1.5 relative -top-0.5"
+          onClick={handleSessionDecrement}
+        >
+          <Icon icon={minusIcon} />
+        </button>
+        <p id="session-length" className="text-3xl">
+          {sessionLength}
+        </p>
+        <button
+          id="session-increment"
+          className="border-2 border-primary rounded-md w-6 h-6 flex items-center justify-center mx-1.5 relative -top-0.5"
+          onClick={handleSessionIncrement}
+        >
+          <Icon icon={plusIcon} />
+        </button>
+      </div>
     </div>
   );
 }
