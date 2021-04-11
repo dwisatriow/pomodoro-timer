@@ -12,11 +12,14 @@ function Timer({
   isRunning,
 }) {
   return (
-    <div id="timer-container" className="flex flex-col items-center">
-      <h2 id="timer-label" className="text-5xl mt-4">
+    <div
+      id="timer-container"
+      className="flex flex-col items-center mt-5 sm:mt-4 md:mt-6"
+    >
+      <h2 id="timer-label" className="text-4xl md:text-5xl">
         {session}
       </h2>
-      <p id="time-left" className="text-8xl">
+      <p id="time-left" className="text-6xl md:text-7xl lg:text-8xl">
         {minutes}:{seconds <= 9 ? 0 : null}
         {seconds}
       </p>
@@ -25,14 +28,14 @@ function Timer({
       <div id="timer-control" className="flex">
         <button
           id="start-stop"
-          className="border-2 border-primary rounded-md w-10 h-10 flex items-center justify-center mx-2"
+          className="border-2 border-primary rounded-md w-8 h-8 lg:w-9 lg:h-9 flex items-center justify-center mx-1.5 lg:mx-2"
           onClick={handleStartStop}
         >
           <Icon icon={isRunning ? pauseIcon : playIcon} width={32} />
         </button>
         <button
           id="reset"
-          className="border-2 border-primary rounded-md w-10 h-10 flex items-center justify-center mx-2"
+          className="border-2 border-primary rounded-md w-8 h-8 lg:w-9 lg:h-9 flex items-center justify-center mx-1.5 lg:mx-2"
           onClick={handleReset}
         >
           <Icon icon={powerReset} width={22} hFlip={true} />

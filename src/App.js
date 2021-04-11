@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import useInterval from "./components/hooks/useInterval";
-import "./App.css";
 import Timer from "./components/Timer";
 import Session from "./components/Session";
 import Break from "./components/Break";
@@ -88,9 +87,12 @@ function App() {
   return (
     <div
       id="App"
-      className="bg-white bg-opacity-30 text-primary p-8 rounded-2xl flex flex-col items-center font-sans"
+      className="bg-white bg-opacity-30 text-primary p-10 sm:px-16 sm:py-6 md:py-9 md:px-24 lg:px-32 rounded-2xl flex flex-col items-center font-sans"
     >
-      <h1 id="app-name" className="text-5xl border-b-2 border-primary">
+      <h1
+        id="app-name"
+        className="text-4xl md:text-5xl  border-b-2 border-primary w-56 sm:w-60 md:w-80 text-center"
+      >
         Pomodoro Timer
       </h1>
       <Timer
@@ -101,16 +103,21 @@ function App() {
         handleReset={handleReset}
         isRunning={isRunning}
       />
-      <Session
-        sessionLength={sessionLength}
-        handleSessionIncrement={handleSessionIncrement}
-        handleSessionDecrement={handleSessionDecrement}
-      />
-      <Break
-        breakLength={breakLength}
-        handleBreakIncrement={handleBreakIncrement}
-        handleBreakDecrement={handleBreakDecrement}
-      />
+      <div
+        id="control-container"
+        className="flex flex-col justify-between sm:flex-row items-center sm:mt-4 md:mt-6 sm:w-72 md:w-96"
+      >
+        <Session
+          sessionLength={sessionLength}
+          handleSessionIncrement={handleSessionIncrement}
+          handleSessionDecrement={handleSessionDecrement}
+        />
+        <Break
+          breakLength={breakLength}
+          handleBreakIncrement={handleBreakIncrement}
+          handleBreakDecrement={handleBreakDecrement}
+        />
+      </div>
     </div>
   );
 }
