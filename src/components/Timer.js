@@ -15,6 +15,7 @@ function Timer({
 }) {
   useEffect(() => {
     if (timeLeft === 0) {
+      audioRef.current.currentTime = 0;
       audioRef.current.play();
     }
   }, [timeLeft, audioRef]);
@@ -32,6 +33,7 @@ function Timer({
         {session}
       </h2>
       <p id="time-left" className="text-6xl md:text-7xl lg:text-8xl">
+        {minutes <= 9 ? 0 : null}
         {minutes}:{seconds <= 9 ? 0 : null}
         {seconds}
       </p>

@@ -23,11 +23,11 @@ function App() {
 
   // Handle session changed
   useEffect(() => {
-    if (timeLeft === -1 && session === "Session") {
+    if (timeLeft === 0 && session === "Session") {
       setSession("Break");
       setTimeLeft(sessionLength * 60);
     }
-    if (timeLeft === -1 && session === "Break") {
+    if (timeLeft === 0 && session === "Break") {
       setSession("Session");
       setTimeLeft(breakLength * 60);
     }
