@@ -1,16 +1,28 @@
+import { useEffect } from "react";
 import { Icon } from "@iconify/react";
 import playIcon from "@iconify/icons-bi/play";
 import pauseIcon from "@iconify/icons-fe/pause";
 import powerReset from "@iconify/icons-grommet-icons/power-reset";
+import audioSrc from "../media/alarm_beeps.mp3";
 
 function Timer({
   session,
-  minutes,
-  seconds,
+  timeLeft,
   handleStartStop,
   handleReset,
   isRunning,
+  audioRef,
 }) {
+  useEffect(() => {
+    if (timeLeft === 0) {
+      audioRef.current.play();
+    }
+  }, [timeLeft, audioRef]);
+
+  // Calculate minutes and seconds left
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
   return (
     <div
       id="timer-container"
@@ -23,7 +35,9 @@ function Timer({
         {minutes}:{seconds <= 9 ? 0 : null}
         {seconds}
       </p>
-      <audio id="beep"></audio>
+      <audio id="beep" ref={audioRef}>
+        <source src={audioSrc} type="audio/mp3" />
+      </audio>
 
       <div id="timer-control" className="flex">
         <button

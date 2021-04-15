@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useInterval from "./components/hooks/useInterval";
 import Timer from "./components/Timer";
 import Session from "./components/Session";
@@ -11,6 +11,8 @@ function App() {
   const [breakLength, setBreakLength] = useState(5);
   const [timeLeft, setTimeLeft] = useState(1500);
 
+  const audioRef = useRef();
+
   // Setting userInterval callback
   useInterval(
     () => {
@@ -21,11 +23,11 @@ function App() {
 
   // Handle session changed
   useEffect(() => {
-    if (timeLeft === 0 && session === "Session") {
+    if (timeLeft === -1 && session === "Session") {
       setSession("Break");
       setTimeLeft(sessionLength * 60);
     }
-    if (timeLeft === 0 && session === "Break") {
+    if (timeLeft === -1 && session === "Break") {
       setSession("Session");
       setTimeLeft(breakLength * 60);
     }
@@ -49,9 +51,12 @@ function App() {
   // Handle reset
   function handleReset() {
     setIsRunning(false);
+    setSession("Session");
     setSessionLength(25);
     setBreakLength(5);
     setTimeLeft(1500);
+    audioRef.current.currentTime = 0;
+    audioRef.current.pause();
   }
 
   // Handle session increment
@@ -80,10 +85,6 @@ function App() {
     }
   }
 
-  // Calculate minutes and seconds left
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
-
   return (
     <div
       id="App"
@@ -97,11 +98,11 @@ function App() {
       </h1>
       <Timer
         session={session}
-        minutes={minutes}
-        seconds={seconds}
+        timeLeft={timeLeft}
         handleStartStop={handleStartStop}
         handleReset={handleReset}
         isRunning={isRunning}
+        audioRef={audioRef}
       />
       <div
         id="control-container"
